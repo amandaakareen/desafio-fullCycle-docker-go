@@ -5,9 +5,7 @@ RUN go mod download && go mod verify
 COPY . .
 RUN go build -v -o /usr/local/bin/app ./...
 
-
-
 FROM scratch
-WORKDIR /usr/src/app
-COPY --from=go  /usr/src/app .
-CMD ["app"]
+WORKDIR /usr/src/app 
+COPY --from=go  /usr/local/bin/app /usr/local/bin/app
+CMD ["/usr/local/bin/app"]
